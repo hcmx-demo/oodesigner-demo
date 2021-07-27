@@ -8,28 +8,6 @@ flow:
         default: Cloud_1234
         sensitive: true
   workflow:
-    - install_tomcat:
-        do:
-          Integrations.demo.aos.software.install_tomcat:
-            - username: '${target_host_username}'
-            - password:
-                value: '${target_host_password}'
-                sensitive: true
-            - tomcat_host: '${target_host}'
-        navigate:
-          - FAILURE: on_failure
-          - SUCCESS: install_aos_application
-    - install_aos_application:
-        do:
-          Integrations.demo.aos.application.install_aos_application:
-            - username: '${target_host_username}'
-            - password:
-                value: '${target_host_password}'
-                sensitive: true
-            - tomcat_host: '${target_host}'
-        navigate:
-          - FAILURE: on_failure
-          - SUCCESS: SUCCESS
     - install_postgres:
         do:
           Integrations.demo.aos.software.install_postgres:
@@ -52,12 +30,37 @@ flow:
         navigate:
           - FAILURE: on_failure
           - SUCCESS: install_tomcat
+    - install_tomcat:
+        do:
+          Integrations.demo.aos.software.install_tomcat:
+            - username: '${target_host_username}'
+            - password:
+                value: '${target_host_password}'
+                sensitive: true
+            - tomcat_host: '${target_host}'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: install_aos_application
+    - install_aos_application:
+        do:
+          Integrations.demo.aos.application.install_aos_application:
+            - username: '${target_host_username}'
+            - password:
+                value: '${target_host_password}'
+                sensitive: true
+            - tomcat_host: '${target_host}'
+        navigate:
+          - FAILURE: on_failure
+          - SUCCESS: SUCCESS
   results:
     - FAILURE
     - SUCCESS
 extensions:
   graph:
     steps:
+      install_tomcat:
+        x: 780
+        'y': 257
       install_aos_application:
         x: 989
         'y': 270
@@ -71,9 +74,6 @@ extensions:
       install_java:
         x: 583
         'y': 259
-      install_tomcat:
-        x: 780
-        'y': 257
     results:
       SUCCESS:
         af6d6c62-dece-797d-3cc8-c266c048c84d:
