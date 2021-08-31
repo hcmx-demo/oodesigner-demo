@@ -58,7 +58,7 @@ extensions:
     steps:
       install_postgres:
         x: 150
-        'y': 45
+        'y': 47
       install_java:
         x: 272
         'y': 46
