@@ -59,10 +59,10 @@ extensions:
   graph:
     steps:
       install_postgres:
-        x: 150
-        'y': 47
+        x: 151
+        'y': 48
       install_java:
-        x: 272
+        x: 273
         'y': 46
       install_tomcat:
         x: 389
