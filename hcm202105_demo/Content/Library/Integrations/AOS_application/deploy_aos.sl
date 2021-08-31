@@ -4,7 +4,9 @@ flow:
   inputs:
     - target_host: 172.16.239.129
     - target_host_username: root
-    - target_host_password: Cloud_1234
+    - target_host_password:
+        default: Cloud_1234
+        sensitive: true
   workflow:
     - install_postgres:
         do:
